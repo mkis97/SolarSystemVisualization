@@ -15,7 +15,15 @@ export default {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
-    ]
+    ],
+    script: [
+      {
+        type: "text/javascript",
+        src: 'http://d3js.org/d3.v3.min.js',
+        async: true,
+        defer: true,
+      },
+    ],
   },
   /*
   ** Customize the progress-bar color
