@@ -1,37 +1,49 @@
 <template>
   <v-app>
-    <v-main>
-      <v-container>
-        <nuxt />
-      </v-container>
-    </v-main>
+    <v-navigation-drawer permanent app fixed>
+      <v-list
+        dense
+        nav
+      >
+        <v-list-item
+          v-for="item in items"
+          :key="item.title"
+          link
+          @click="$router.push(`${item.to}`)"
+        >
+          <v-list-item-icon>
+            <v-icon>{{ item.icon }}</v-icon>
+          </v-list-item-icon>
+
+          <v-list-item-content>
+            <v-list-item-title>{{ item.title }}</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+      </v-list>
+    </v-navigation-drawer>
+    <v-content>
+      <nuxt/>
+    </v-content>
   </v-app>
 </template>
 
 <script>
-export default {
-  data () {
-    return {
-      clipped: false,
-      drawer: false,
-      fixed: false,
-      items: [
-        {
-          icon: 'mdi-apps',
-          title: 'Welcome',
-          to: '/'
-        },
-        {
-          icon: 'mdi-chart-bubble',
-          title: 'Inspire',
-          to: '/inspire'
+    export default {
+        data() {
+            return {
+                items: [
+                    {
+                        icon: 'mdi-apps',
+                        title: 'Rotation',
+                        to: '/'
+                    },
+                    {
+                        icon: 'mdi-chart-bubble',
+                        title: 'Graph',
+                        to: '/graph'
+                    }
+                ],
+            }
         }
-      ],
-      miniVariant: false,
-      right: true,
-      rightDrawer: false,
-      title: 'Vuetify.js'
     }
-  }
-}
 </script>

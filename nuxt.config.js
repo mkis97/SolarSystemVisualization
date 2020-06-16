@@ -19,7 +19,7 @@ export default {
     script: [
       {
         type: "text/javascript",
-        src: 'http://d3js.org/d3.v3.min.js',
+        src: 'https://cdnjs.cloudflare.com/ajax/libs/d3/5.16.0/d3.js',
         async: true,
         defer: true,
       },
