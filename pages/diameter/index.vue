@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid>
+  <v-container fluid fill-height>
     <v-row justify="center">
       <v-card width="500" height="500" class="body">
       </v-card>
@@ -55,14 +55,13 @@
                     .outerRadius(outerRadius);
 
 
-
                 var data = [];
 
                 this.plan.forEach(item=>{
                     console.log(item)
                     let obj= {name: "", value: null}
                     obj.name=item.name
-                    obj.value=item.mass
+                    obj.value=item.diameter
                     data.push(obj)
                 })
 

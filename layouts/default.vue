@@ -39,8 +39,8 @@
                     },
                     {
                         icon: 'mdi-chart-bubble',
-                        title: 'Graph',
-                        to: '/graph'
+                        title: 'Diameter',
+                        to: '/diameter'
                     }
                 ],
             }
