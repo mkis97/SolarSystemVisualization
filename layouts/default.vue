@@ -33,32 +33,32 @@
             return {
                 items: [
                     {
-                        icon: 'mdi-apps',
+                        icon: 'mdi-rotate-3d-variant',
                         title: 'Rotation',
                         to: '/'
                     },
                     {
-                        icon: 'mdi-chart-bubble',
+                        icon: 'mdi-diameter-variant',
                         title: 'Diameter',
                         to: '/diameter'
                     },
                     {
-                        icon: 'mdi-chart-bubble',
+                        icon: 'mdi-moon-full',
                         title: 'Density',
                         to: '/density'
                     },
                     {
-                        icon: 'mdi-chart-bubble',
+                        icon: 'mdi-map-marker-distance',
                         title: 'Distance from Sun',
                         to: '/distance_from_sun'
                     },
                     {
-                        icon: 'mdi-chart-bubble',
+                        icon: 'mdi-download',
                         title: 'Gravity',
                         to: '/gravity'
                     },
                     {
-                        icon: 'mdi-chart-bubble',
+                        icon: 'mdi-scatter-plot-outline',
                         title: 'Satellites',
                         to: '/satellites'
                     }
