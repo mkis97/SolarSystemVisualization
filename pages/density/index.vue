@@ -1,7 +1,7 @@
 <template>
-  <v-container fluid fill-height>
+  <v-container fluid fill-height  id="init">
     <v-row justify="center">
-      <v-card width="500" height="500" class="body">
+      <v-card width="500" height="500" class="body" style="border-radius: 16px">
       </v-card>
     </v-row>
   </v-container>
@@ -27,7 +27,6 @@
                 try {
                     let res = await this.$axios.get('https://raw.githubusercontent.com/devstronomy/nasa-data-scraper/master/data/json/planets.json')
                     this.plan = res.data
-                    console.log(this.plan)
                 } catch (err) {
                     console.log(err)
                 }
@@ -37,21 +36,20 @@
                 var data = [];
 
                 this.plan.forEach(item => {
-                    console.log(item)
                     let obj = {name: "", value: null}
                     obj.name = item.name
                     obj.value = item.density
                     data.push(obj)
                 })
 
-                var margin = {top: 10, right: 30, bottom: 90, left: 40},
-                    width = 460 - margin.left - margin.right,
+                var margin = {top: 40, right: 10, bottom: 90, left: 50},
+                    width = 500 - margin.left - margin.right,
                     height = 500 - margin.top - margin.bottom;
 
                 var svg = d3.select(".body")
                     .append("svg")
-                    .attr("width", width + margin.left + margin.right)
                     .attr("height", height + margin.top + margin.bottom)
+                    .attr("width", width + margin.left + margin.right)
                     .append("g")
                     .attr("transform",
                         "translate(" + margin.left + "," + margin.top + ")");
@@ -62,16 +60,18 @@
                         return d.name;
                     }))
                     .padding(1);
+
                 svg.append("g")
                     .attr("transform", "translate(0," + height + ")")
                     .call(d3.axisBottom(x))
                     .selectAll("text")
-                    .attr("transform", "translate(-10,0)rotate(-45)")
+                    .attr("transform", "translate(-10,10)rotate(-60)")
                     .style("text-anchor", "end");
 
                 var y = d3.scaleLinear()
                     .domain([0, 6000])
                     .range([ height, 0]);
+
                 svg.append("g")
                     .call(d3.axisLeft(y));
 
@@ -91,10 +91,20 @@
                     .append("circle")
                     .attr("cx", function(d) { return x(d.name); })
                     .attr("cy", function(d) { return y(d.value); })
-                    .attr("r", "4")
+                    .attr("r", "7")
                     .style("fill", "#69b3a2")
                     .attr("stroke", "black")
             }
         }
     }
 </script>
+
+
+<style>
+  #init {
+    height: 100%;
+    width: 100%;
+    background: url(../../static/space.jpg);
+    background-size: cover;
+  }
+</style>
