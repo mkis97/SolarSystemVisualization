@@ -41,6 +41,21 @@
                         icon: 'mdi-chart-bubble',
                         title: 'Diameter',
                         to: '/diameter'
+                    },
+                    {
+                        icon: 'mdi-chart-bubble',
+                        title: 'Density',
+                        to: '/density'
+                    },
+                    {
+                        icon: 'mdi-chart-bubble',
+                        title: 'Distance from Sun',
+                        to: '/distance_from_sun'
+                    },
+                    {
+                        icon: 'mdi-chart-bubble',
+                        title: 'Gravity',
+                        to: '/gravity'
                     }
                 ],
             }

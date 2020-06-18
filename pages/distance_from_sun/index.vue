@@ -40,13 +40,14 @@
                     console.log(item)
                     let obj = {name: "", value: null}
                     obj.name = item.name
-                    obj.value = item.density
+                    obj.value = item.distanceFromSun
                     data.push(obj)
                 })
 
-                var margin = {top: 10, right: 30, bottom: 90, left: 40},
+
+                var margin = {top: 30, right: 30, bottom: 70, left: 60},
                     width = 460 - margin.left - margin.right,
-                    height = 500 - margin.top - margin.bottom;
+                    height = 400 - margin.top - margin.bottom;
 
                 var svg = d3.select(".body")
                     .append("svg")
@@ -57,11 +58,11 @@
                         "translate(" + margin.left + "," + margin.top + ")");
 
                 var x = d3.scaleBand()
-                    .range([ 0, width ])
+                    .range([0, width])
                     .domain(data.map(function (d) {
                         return d.name;
                     }))
-                    .padding(1);
+                    .padding(0.2);
                 svg.append("g")
                     .attr("transform", "translate(0," + height + ")")
                     .call(d3.axisBottom(x))
@@ -70,30 +71,26 @@
                     .style("text-anchor", "end");
 
                 var y = d3.scaleLinear()
-                    .domain([0, 6000])
-                    .range([ height, 0]);
+                    .domain([0, 7000])
+                    .range([height, 0]);
                 svg.append("g")
                     .call(d3.axisLeft(y));
 
-                svg.selectAll("myline")
+                svg.selectAll("mybar")
                     .data(data)
                     .enter()
-                    .append("line")
-                    .attr("x1", function(d) { return x(d.name); })
-                    .attr("x2", function(d) { return x(d.name); })
-                    .attr("y1", function(d) { return y(d.value); })
-                    .attr("y2", y(0))
-                    .attr("stroke", "grey")
-
-                svg.selectAll("mycircle")
-                    .data(data)
-                    .enter()
-                    .append("circle")
-                    .attr("cx", function(d) { return x(d.name); })
-                    .attr("cy", function(d) { return y(d.value); })
-                    .attr("r", "4")
-                    .style("fill", "#69b3a2")
-                    .attr("stroke", "black")
+                    .append("rect")
+                    .attr("x", function (d) {
+                        return x(d.name);
+                    })
+                    .attr("y", function (d) {
+                        return y(d.value);
+                    })
+                    .attr("width", x.bandwidth())
+                    .attr("height", function (d) {
+                        return height - y(d.value);
+                    })
+                    .attr("fill", "#69b3a2")
             }
         }
     }
