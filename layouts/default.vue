@@ -56,6 +56,11 @@
                         icon: 'mdi-chart-bubble',
                         title: 'Gravity',
                         to: '/gravity'
+                    },
+                    {
+                        icon: 'mdi-chart-bubble',
+                        title: 'Satellites',
+                        to: '/satellites'
                     }
                 ],
             }
