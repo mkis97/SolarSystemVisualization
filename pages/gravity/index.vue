@@ -1,7 +1,7 @@
 <template>
-  <v-container fluid fill-height>
+  <v-container fluid fill-height id="initG">
     <v-row justify="center">
-      <v-card width="500" height="500" class="body">
+      <v-card width="500" height="500" class="body" id="initG">
       </v-card>
     </v-row>
   </v-container>
@@ -13,7 +13,7 @@
     export default {
         data() {
             return {
-                plan: []
+                planets: []
             }
         },
 
@@ -26,8 +26,7 @@
             async getData() {
                 try {
                     let res = await this.$axios.get('https://raw.githubusercontent.com/devstronomy/nasa-data-scraper/master/data/json/planets.json')
-                    this.plan = res.data
-                    console.log(this.plan)
+                    this.planets = res.data
                 } catch (err) {
                     console.log(err)
                 }
@@ -36,20 +35,20 @@
             renderGraph() {
                 var data = [];
 
-                this.plan.forEach(item => {
-                    console.log(item)
+                this.planets.forEach(item => {
                     let obj = {name: "", value: null}
                     obj.name = item.name
                     obj.value = item.gravity
                     data.push(obj)
                 })
 
-
                 var margin = {top: 10, right: 10, bottom: 10, left: 10},
-                    width = 460 - margin.left - margin.right,
-                    height = 460 - margin.top - margin.bottom,
-                    innerRadius = 80,
-                    outerRadius = Math.min(width, height) / 2;
+                    width = 500 - margin.left - margin.right,
+                    height = 500 - margin.top - margin.bottom,
+                    innerRadius = 100,
+                    outerRadius = 500;
+
+                const color = d3.scaleOrdinal(d3.schemeCategory10);
 
                 var svg = d3.select(".body")
                     .append("svg")
@@ -69,12 +68,20 @@
                     .range([innerRadius, outerRadius])
                     .domain([0, 60]);
 
+                const div = d3
+                    .select('.body')
+                    .append('div')
+                    .attr('class', 'tooltip')
+                    .style('opacity', 0);
+
                 svg.append("g")
                     .selectAll("path")
                     .data(data)
                     .enter()
                     .append("path")
-                    .attr("fill", "#69b3a2")
+                    .attr("fill", function (d, i) {
+                        return color(i);
+                    })
                     .attr("d", d3.arc()
                         .innerRadius(innerRadius)
                         .outerRadius(function (d) {
@@ -88,7 +95,45 @@
                         })
                         .padAngle(0.01)
                         .padRadius(innerRadius))
+                    .on("mouseover", function (d) {
+                        setTimeout(function () {
+                            var x = document.getElementsByClassName("tooltip")
+                            x[0].className = 'hidden'
+                        }, 2500)
+                        div.transition()
+                            .duration(200)
+                            .attr("class", "tooltip")
+                            .style("opacity", 1);
+                        div.html(d.name + ' - ' + d.value + ' m/s2')
+                            .style("left", (d3.event.pageX - 500) + "px")
+                            .style("top", (d3.event.pageY - 150) + "px")
+                    })
             }
         }
     }
 </script>
+
+<style>
+  #initG {
+    height: 100%;
+    width: 100%;
+    background: url(../../static/space.jpg);
+    background-size: cover;
+  }
+
+  .hidden {
+    display: none;
+  }
+
+  .tooltip {
+    width: 250px;
+    height: 50px;
+    background: #47494e;
+    position: absolute;
+    padding: 10px;
+    text-align: center;
+    font-weight: 700;
+    font-size: 16px;
+    border-radius: 16px;
+  }
+</style>
