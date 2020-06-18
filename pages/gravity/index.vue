@@ -4,6 +4,10 @@
       <v-card width="500" height="500" class="body" id="initG">
       </v-card>
     </v-row>
+    <v-row justify="end">
+      <v-card class="legend mr-5" style="border-radius: 16px">
+      </v-card>
+    </v-row>
   </v-container>
 </template>
 
@@ -106,8 +110,44 @@
                             .style("opacity", 1);
                         div.html(d.name + ' - ' + d.value + ' m/s2')
                             .style("left", (d3.event.pageX - 500) + "px")
-                            .style("top", (d3.event.pageY - 150) + "px")
+                            .style("top", (d3.event.pageY - 110) + "px")
                     })
+
+                var lgnd = d3.select(".legend")
+                    .append("svg")
+                    .attr("width", 200)
+                    .attr("height", 185)
+
+                var labels = ["Mercury", "Venus", "Earth", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune", "Pluto"]
+
+                lgnd.selectAll("ld")
+                    .data(labels)
+                    .enter()
+                    .append("circle")
+                    .attr("cx", 60)
+                    .attr("cy", function (d, i) {
+                        return 15 + i * 20
+                    })
+                    .attr("r", 7)
+                    .style("fill", function (d, i) {
+                        return color(i)
+                    })
+
+                lgnd.selectAll("ll")
+                    .data(labels)
+                    .enter()
+                    .append("text")
+                    .attr("x", 90)
+                    .attr("y", function (d, i) {
+                        return 15 + i * 20
+                    })
+                    .style("fill", function (d, i) {
+                        return color(i)
+                    })
+                    .text(function (d) {
+                        return d
+                    })
+                    .style("alignment-baseline", "middle")
             }
         }
     }

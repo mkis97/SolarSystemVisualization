@@ -1,7 +1,11 @@
 <template>
-  <v-container fluid fill-height>
+  <v-container fluid fill-height id="initS">
     <v-row justify="center">
-      <v-card width="500" height="500" class="body">
+      <v-card width="500" height="500" class="body" style="border-radius: 16px">
+      </v-card>
+    </v-row>
+    <v-row justify="end">
+      <v-card class="legend mr-5" style="border-radius: 16px">
       </v-card>
     </v-row>
   </v-container>
@@ -96,7 +100,55 @@
                                 return d.y;
                             })
                     });
+
+
+                var lgnd = d3.select(".legend")
+                    .append("svg")
+                    .attr("width", 200)
+                    .attr("height", 165)
+
+                var labels = ["Venus", "Earth", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune", "Pluto"]
+
+                var colors = ["#9400D3", "#FF0000", "#00FF00", "#FF7F00", "#4B0082", "#0000FF", "#FFFF00"]
+
+                lgnd.selectAll("ld")
+                    .data(labels)
+                    .enter()
+                    .append("circle")
+                    .attr("cx", 60)
+                    .attr("cy", function (d, i) {
+                        return 15 + i * 20
+                    })
+                    .attr("r", 7)
+                    .style("fill", function (d, i) {
+                        return colors[i]
+                    })
+
+                lgnd.selectAll("ll")
+                    .data(labels)
+                    .enter()
+                    .append("text")
+                    .attr("x", 90)
+                    .attr("y", function (d, i) {
+                        return 15 + i * 20
+                    })
+                    .style("fill", function (d, i) {
+                        return colors[i]
+                    })
+                    .text(function (d) {
+                        return d
+                    })
+                    .style("alignment-baseline", "middle")
             }
         }
     }
 </script>
+
+<style>
+  #initS {
+    height: 100%;
+    width: 100%;
+    background: url(../../static/space.jpg);
+    background-size: cover;
+  }
+</style>
