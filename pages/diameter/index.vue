@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid fill-height id="init">
+  <v-container fluid fill-height id="initDi">
     <v-row justify="center">
       <v-card width="500" height="500" class="body" style="border-radius: 16px; position: relative" id="init">
       </v-card>
@@ -100,7 +100,7 @@
 
 
 <style>
-  #init {
+  #initDi {
     height: 100%;
     width: 100%;
     background: url(../../static/space.jpg);
