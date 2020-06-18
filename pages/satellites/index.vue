@@ -13,7 +13,7 @@
     export default {
         data() {
             return {
-                plan: []
+                planets: []
             }
         },
 
@@ -26,8 +26,7 @@
             async getData() {
                 try {
                     let res = await this.$axios.get('https://raw.githubusercontent.com/devstronomy/nasa-data-scraper/master/data/json/planets.json')
-                    this.plan = res.data
-                    console.log(this.plan)
+                    this.planets = res.data
                 } catch (err) {
                     console.log(err)
                 }
@@ -36,7 +35,7 @@
             renderGraph() {
                 var data = [];
 
-                this.plan.forEach((item, index) => {
+                this.planets.forEach((item, index) => {
                     let moons = item.numberOfMoons
                     for (let i = 0; i < moons; i++) {
                         let obj = {name: "", group: null}
@@ -82,9 +81,9 @@
                         return x(d.group)
                     }))
                     .force("y", d3.forceY().strength(0.1).y(height / 2))
-                    .force("center", d3.forceCenter().x(width / 2).y(height / 2)) // Attraction to the center of the svg area
-                    .force("charge", d3.forceManyBody().strength(1)) // Nodes are attracted one each other of value is > 0
-                    .force("collide", d3.forceCollide().strength(.1).radius(15).iterations(1)) // Force that avoids circle overlapping
+                    .force("center", d3.forceCenter().x(width / 2).y(height / 2))
+                    .force("charge", d3.forceManyBody().strength(1))
+                    .force("collide", d3.forceCollide().strength(.1).radius(15).iterations(1))
 
                 simulation
                     .nodes(data)
