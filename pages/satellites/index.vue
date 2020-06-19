@@ -105,9 +105,9 @@
                 var lgnd = d3.select(".legend")
                     .append("svg")
                     .attr("width", 200)
-                    .attr("height", 165)
+                    .attr("height", 145)
 
-                var labels = ["Venus", "Earth", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune", "Pluto"]
+                var labels = ["Earth", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune", "Pluto"]
 
                 var colors = ["#9400D3", "#FF0000", "#00FF00", "#FF7F00", "#4B0082", "#0000FF", "#FFFF00"]
 
